@@ -10,3 +10,6 @@ How to play
 - Brown colored tiles are the holes which you lose game
 
 ![magic-board-help](https://user-images.githubusercontent.com/65271851/178004918-6998c3e7-04d6-4e1d-b0de-bfc5d03916dd.jpg)
+
+Here is the link to download the build.
+https://drive.google.com/file/d/1IBm26Q8LqhgpZzE_cudWdjYbEQu_BTmy/view?usp=sharing
