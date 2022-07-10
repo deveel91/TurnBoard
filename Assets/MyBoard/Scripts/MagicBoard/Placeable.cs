@@ -10,20 +10,20 @@ namespace MagicBoard
         /// What tile is the placeable on? It should match its player.
         /// </summary>
         public int currentTileNumber = -1;
-        GameObject[] tileGameObjects => GameUtilities.tiles;
+        GameObject[] TileGameObjects => GameUtilities.Tiles;
         /// <summary>
         /// For placing players on a tile. Do not use to place tiles.
         /// </summary>
         /// <param name="tileNumber">The tile number the Player will be on.</param>
         public void PlaceAtTile(int tileNumber)
         {
-            for (int x = 0; x < tileGameObjects.Length; x++)
+            for (int x = 0; x < TileGameObjects.Length; x++)
             {
-                var tile = tileGameObjects[x].GetComponent<GameBoardTile>();
+                var tile = TileGameObjects[x].GetComponent<GameBoardTile>();
                 if (tile.tileNumber == tileNumber)
                 {
 
-                    transform.position = tileGameObjects[x].transform.position;
+                    transform.position = TileGameObjects[x].transform.position;
                     currentTileNumber = tileNumber;
                     //Debug.Log(tile.tileType + ":" + tileNumber);
                     GameManager.Instance.CheckIfOver(tile.tileType);

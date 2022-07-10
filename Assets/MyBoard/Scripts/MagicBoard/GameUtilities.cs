@@ -14,8 +14,12 @@ namespace MagicBoard
     {
         public static GameMode gameMode = GameMode.PLAYER_TURN;
         private static GameObject[] m_tiles = null;
-        public static GameObject[] tiles
+        public static GameObject[] Tiles
         {
+            set
+            {
+                m_tiles = value;
+            }
             get
             {
                 if (m_tiles == null) m_tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -24,11 +28,11 @@ namespace MagicBoard
         }
         public static GameBoardTile GetTileById(int id)
         {
-            for (int x = 0; x < tiles.Length; x++)
+            for (int x = 0; x < Tiles.Length; x++)
             {
-                if (tiles[x].GetComponent<GameBoardTile>().tileNumber == id)
+                if (Tiles[x].GetComponent<GameBoardTile>().tileNumber == id)
                 {
-                    return tiles[x].GetComponent<GameBoardTile>();
+                    return Tiles[x].GetComponent<GameBoardTile>();
 
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace MagicBoard
@@ -53,8 +54,15 @@ namespace MagicBoard
 
         private void Start()
         {
+            GameUtilities.Tiles = GameObject.FindGameObjectsWithTag("Tile");
+            GameUtilities.gameMode = GameMode.PLAYER_TURN;
             foreach (var pp in players) pp.MoveOn(0);
+
             ShowLog("Game starts! Roll Dice!");
+        }
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         /// <summary>
         /// Move current player
@@ -62,8 +70,7 @@ namespace MagicBoard
         /// <param name="steps">Count of steps for player to move.</param>
         public void MovePlayer(int steps)
         {
-            if (player == null)
-                return;
+            if (player == null) return;
             player.MoveOn(steps);
             NextTurn();            
         }
@@ -73,12 +80,8 @@ namespace MagicBoard
         /// <param name="tile">Tile instance which the player will be placed on.</param>
         public void MovePlayer(GameBoardTile tile = null)
         {
-            if (player == null)
-                return;
-            if(tile == null)
-                player.SelectRoute();
-            else
-                player.SelectRoute(tile);
+            if (player == null) return;
+            player.SelectRoute(tile);
             NextTurn();
         }
         /// <summary>
@@ -86,8 +89,7 @@ namespace MagicBoard
         /// </summary>
         public void NextTurn()
         {
-            if (GameUtilities.gameMode == GameMode.GAME_OVER)
-                return;
+            if (GameUtilities.gameMode == GameMode.GAME_OVER) return;
             player.Highlight(false);
             turn += 1;
             var p = turn % players.Length;

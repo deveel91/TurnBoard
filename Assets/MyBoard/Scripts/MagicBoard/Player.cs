@@ -43,36 +43,38 @@ namespace MagicBoard
             placeable.PlaceAtTile(currentTileNumber + steps);
         }
         /// <summary>
-        /// Move player to best matched tile
+        /// Find best matched tile to move directly
         /// </summary>
-        public void SelectRoute()
+        private GameBoardTile GetBestTile()
         {
             List<GameBoardTile> bestTiles = new List<GameBoardTile>();
-            foreach(var t in selectableTiles)
+            GameBoardTile title;
+            foreach (var t in selectableTiles)
             {
-                if(t.tileType == TileTypes.FINAL)
+                if (t.tileType == TileTypes.FINAL)
                 {
-                    SelectRoute(t);
-                    return;
+                    title = t;
+                    break;
                 }
                 if (t.tileType == TileTypes.HOLE)
                     continue;
                 bestTiles.Add(t);
             }
-            GameBoardTile title;
-            if(bestTiles.Count > 0)
+
+            if (bestTiles.Count > 0)
                 title = bestTiles[Random.Range(0, bestTiles.Count)];
             else
                 title = selectableTiles[Random.Range(0, selectableTiles.Length)];
-            SelectRoute(title);
+            return title;
         }
         /// <summary>
         /// Move player to selected tile
         /// </summary>
         /// <param name="tile">Tile instance which the player will be placed on.</param>
-        public void SelectRoute(GameBoardTile tile)
+        public void SelectRoute(GameBoardTile tile = null)
         {
-            placeable.PlaceAtTile(tile);
+            var _tile = tile == null ? GetBestTile() : tile;
+            placeable.PlaceAtTile(_tile);
             foreach (var t in selectableTiles)
             {
                 if (t == null) continue;

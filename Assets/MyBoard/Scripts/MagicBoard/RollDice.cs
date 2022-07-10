@@ -17,20 +17,6 @@ namespace MagicBoard
         /// </summary>
         private Vector3[] directions = new Vector3[] { Vector3.zero, Vector3.back, Vector3.down, Vector3.right, Vector3.left, Vector3.up, Vector3.forward };
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyUp(KeyCode.A))
-            {
-                Roll(m_duration);
-            }
-        }
-
         private void OnMouseUp()
         {
             if (GameUtilities.gameMode != GameMode.PLAYER_TURN) return;
